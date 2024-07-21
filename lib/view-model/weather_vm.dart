@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:spiderweb/models/WeatherModel.dart';
 
 import '../helpers/network_helper.dart';
@@ -25,7 +26,9 @@ class WeatherViewModel extends ChangeNotifier {
     if (response is Success) {
       setWeatherModel(response.response as List<WeaherModel>);
     } else if (response is Failure) {
-      print(response.response);
+      Fluttertoast.showToast(
+          msg:
+              "Request failed with status code ${response.statusCode} because ${response.response}");
     }
     setLoading(false);
   }
